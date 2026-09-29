@@ -25,6 +25,7 @@ ExecStart=/usr/bin/docker run --rm \
     -p ${PORT}:25565 \
     -e EULA=TRUE \
     -e MODE=creative \
+    -e ONLINE_MODE=FALSE \
     -e RCON_PASSWORD=attackheli \
     -v ${DATA}:/data \
     itzg/minecraft-server
