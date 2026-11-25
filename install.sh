@@ -64,12 +64,19 @@ until docker exec "${CONTAINER_NAME}" rcon-cli help > /dev/null 2>&1; do
 done
 
 echo "==> Configuring whitelist and operator..."
-# Asaf
-docker exec -i "${CONTAINER_NAME}" rcon-cli whitelist add "iron_wall"
-docker exec -i "${CONTAINER_NAME}" rcon-cli op "iron_wall"
-# Ariel
-docker exec -i "${CONTAINER_NAME}" rcon-cli whitelist add "notdiiM"
-docker exec -i "${CONTAINER_NAME}" rcon-cli op "notdiiM"
+declare -A PLAYERS=(
+    [iron_wall]="Asaf"
+    [notdiiM]="Ariel"
+    [NullSon]="Lavi"
+    [DuckLord89]="Neta"
+    [BurstingWaif519]="Shalom"
+    [aloncraimer]="Alon"
+)
+
+for player in "${!PLAYERS[@]}"; do
+    docker exec -i "${CONTAINER_NAME}" rcon-cli whitelist add "${player}"
+    docker exec -i "${CONTAINER_NAME}" rcon-cli op "${player}"
+done
 
 
 echo ""
