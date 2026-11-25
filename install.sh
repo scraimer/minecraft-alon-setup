@@ -23,9 +23,12 @@ Type=simple
 ExecStart=/usr/bin/docker run --rm \
     --name ${CONTAINER_NAME} \
     -p ${PORT}:25565 \
+    -p 24454:24454/udp \
     -e EULA=TRUE \
     -e MODE=creative \
     -e ONLINE_MODE=FALSE \
+    -e TYPE=FABRIC \
+    -e MODRINTH_PROJECTS=simple-voice-chat:beta \
     -e RCON_PASSWORD=attackheli \
     -v ${DATA}:/data \
     itzg/minecraft-server
@@ -43,7 +46,8 @@ EOF
 
 sudo systemctl daemon-reload
 sudo systemctl enable "${SERVICE_NAME}"
-sudo systemctl start "${SERVICE_NAME}"
+sudo systemctl reset-failed "${SERVICE_NAME}"
+sudo systemctl restart "${SERVICE_NAME}"
 
 echo "==> Waiting for Minecraft server to be ready (may take a few minutes)..."
 TIMEOUT=300
