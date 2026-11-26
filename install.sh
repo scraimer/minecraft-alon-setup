@@ -25,7 +25,7 @@ ExecStart=/usr/bin/docker run --rm \
     -p ${PORT}:25565 \
     -p 24454:24454/udp \
     -e EULA=TRUE \
-    -e MODE=creative \
+    -e MODE=survival \
     -e ONLINE_MODE=FALSE \
     -e TYPE=FABRIC \
     -e MODRINTH_PROJECTS=simple-voice-chat:beta \
